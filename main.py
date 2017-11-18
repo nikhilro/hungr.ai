@@ -13,8 +13,9 @@ class Servo():
 		self.angle = 0
 
 	def setAngle(self, angle):
-		self.angle = 0.053*angle + 2.2
-		self.pwm.ChangeDutyCycle(self.angle)
+		set_angle = 0.053*angle + 2.2
+		self.pwm.ChangeDutyCycle(set_angle)
+		self.angle = set_angle
 
 	def adjustAngle(self, angle):
 		self.setAngle(self.angle + angle)
