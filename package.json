@@ -9,7 +9,7 @@
     "webpack": "webpack --progress --verbose --colors --display-error-details",
     "pysetup": "python3 setup.py install || python setup.py install",
     "build": "npm run webpack && npm install && npm run pysetup",
-    "clean": "rm *.pyc"
+    "venv": "virtualenv -p python3 env"
   },
   "author": "",
   "license": "ISC",
