@@ -19,22 +19,22 @@ class Servo():
 
 	def move(self, angle):
 		self.setAngle(0)
+		sleep(1)
 		self.setAngle(120)
 
 
 def move(n):
 	if(n == 1):
 		servoY.move()
-	else if(n == 2):
+	elif(n == 2):
 		servoB.move()
-	else if(n == 3):
+	elif(n == 3):
 		servoG.move()
 	else:
 		servoO.move()
 
 
 def loop():
-	flag = True
 	print("program running")
 	while True:
 		btnState = GPIO.input(BTN)
@@ -45,7 +45,6 @@ def loop():
 
 if __name__ == '__main__':		# Program start from here
 	try:
-		os.system('./raspi.sh')
 		servoY = Servo(17)
 		servoB = Servo(27)
 		servoG = Servo(22)
