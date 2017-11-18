@@ -3,8 +3,6 @@ import PIL
 import picamera
 from time import sleep
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
 BTN = 22
 
 class Servo():
@@ -26,15 +24,23 @@ class Servo():
 		self.pwm.stop()
 
 def setup():
-	servo1 = Servo(17)
+	GPIO.setwarnings(False)
+	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	servo1 = Servo(17)
+	
 
+def destroy():
+	servo1.stop()
+	GPIO.cleanup()
 
 def loop():
 	flag = True
+	print("program running")
 	while True:
 		btnState = GPIO.input(BTN)
 		if btnState == 0:
+			print("button press")
 			if flag:
 				servo1.setAngle(0)
 			else:
@@ -44,7 +50,7 @@ def loop():
 
 if __name__ == '__main__':		# Program start from here
 	try:
+		setup()
 		loop()
 	except KeyboardInterrupt:	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-		servo1.stop()
-		GPIO.cleanup()
+		destroy()
