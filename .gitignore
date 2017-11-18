@@ -1,0 +1,13 @@
+# dependencies
+/node_modules
+
+# production
+/build
+/dist
+/hungr.ai.egg-info
+
+# virtualenv
+/flask
+
+# misc
+*.pyc
