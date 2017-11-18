@@ -1,7 +1,11 @@
-import io
 import time
 import picamera
 from base_camera import BaseCamera
+
+try:
+    import cStringIO as io
+except ImportError:
+    import io
 
 
 class Camera(BaseCamera):

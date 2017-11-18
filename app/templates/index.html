@@ -11,6 +11,7 @@
   </head>
   <body>
     <div id=main></div>
+    <img id="video"></img>
     {{ javascript_tag("app_js") | safe }}
 
     <!-- Scripts -->
@@ -18,12 +19,15 @@
     <script type="text/javascript" charset="utf-8">
         var socket = io.connect('http://' + document.domain + ':' + location.port);
         socket.on('connect', function() {
-            socket.emit('message', 'Hello');
-            socket.emit('my event', {data: 'I\'m connected!'});
-        }, (a, b) => console.log(a + b));
-        socket.on('my response', msg => {
-          console.log('msg', msg);
-        })
+            console.log('Socket connected!');
+            socket.emit('readCamera');
+        });
+        socket.on('videoStart', function(messageEvent) {
+          const video = document.querySelector('#video');
+          let enc = new TextDecoder("utf-8");
+          const data = enc.decode(messageEvent.data);
+          video.src = "data:image/jpeg;base64," + data;
+        });
     </script>
   </body>
 </html>

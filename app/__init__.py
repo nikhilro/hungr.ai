@@ -1,10 +1,9 @@
 import pkg_resources
 
 from os import environ, path
-from flask import Flask, render_template, send_from_directory, Response
+from flask import Flask, render_template, send_from_directory
 from flask_webpack import Webpack
-from flask_socketio import SocketIO, emit
-from helper import gen
+from flask_socketio import SocketIO
 from camera import Camera
 
 
@@ -19,6 +18,16 @@ debug = "DEBUG" in environ
 webpack = Webpack()
 app.config["WEBPACK_MANIFEST_PATH"] = path.join(here, "manifest.json")
 webpack.init_app(app)
+
+
+# def gen(camera):
+#     """Video streaming generator function."""
+#     while True:
+#         frame = camera.get_frame()
+#         socketio.emit('videoStart', {
+#             "data": b'--frame\r\n'
+#                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
+#         })
 
 
 # App Routes
@@ -40,20 +49,10 @@ def send_asset(filename):
 
 
 # Socket Routes
-@socketio.on('message')
-def handle_message(message):
-    print('received message: ' + message)
-
-
-@socketio.on('json')
-def handle_json(json):
-    print('received json: ' + str(json))
-
-
-@socketio.on('my event')
-def handle_my_custom_event(json):
-    print('received json: ' + str(json))
-    return 'one', 2
+@socketio.on('readCamera')
+def read_camera():
+    print('Reading camera...')
+    Camera().get_frame(socketio)
 
 
 if __name__ == "__main__":

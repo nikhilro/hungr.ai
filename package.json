@@ -9,7 +9,8 @@
     "webpack": "webpack --progress --verbose --colors --display-error-details",
     "pysetup": "python3 setup.py install || python setup.py install",
     "build": "npm run webpack && npm install && npm run pysetup",
-    "venv": "virtualenv -p python3 env"
+    "venv": "virtualenv -p python3 env || virtualenv -p $(which python3) env || virtualenv -p $(where.exe python3) env",
+    "camera": "python3 app/websocket.py"
   },
   "author": "",
   "license": "ISC",
