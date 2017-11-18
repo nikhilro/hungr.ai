@@ -5,9 +5,9 @@ __version__ = "0.0.1"
 
 
 setup(
-    name="demo",
+    name="hungr.ai",
     version=__version__,
-    description="Flask demo application",
+    description="Hungry hippos with AI",
     author="Raphael Koh",
     author_email="raph.koh@gmail.com",
     packages=find_packages(),
