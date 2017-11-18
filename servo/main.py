@@ -1,23 +1,10 @@
 import RPi.GPIO as GPIO
-import PIL
-import picamera
-import os
 from time import sleep
-import socket
-port = 5000
 
 BTN = 18
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-def socket():
-	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	s.bind(("", port))
-	print "waiting on port:", port
-	while 1:
-	    data, addr = s.recvfrom(1024)
-	    print data
 
 
 class Servo():
