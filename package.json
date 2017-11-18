@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "python react-flask/__init__.py"
+    "start": "python react-flask/__init__.py",
+    "webpack": "webpack --progress --verbose --colors --display-error-details",
+    "python-setup": "python setup.py install",
+    "build": "npm run webpack && npm install && npm run python-setup"
   },
   "author": "",
   "license": "ISC",

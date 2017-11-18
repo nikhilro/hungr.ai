@@ -5,6 +5,7 @@
 /build
 /dist
 /hungr.ai.egg-info
+/react-flask/public
 
 # virtualenv
 /env
