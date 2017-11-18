@@ -4,7 +4,7 @@ from os import environ, path
 from flask import Flask, render_template, send_from_directory, Response
 from flask_webpack import Webpack
 from helper import gen
-from camera_pi import Camera
+from camera import Camera
 
 
 __version__ = pkg_resources.require("demo")[0].version
