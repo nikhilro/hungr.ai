@@ -5,6 +5,7 @@
 /build
 /dist
 /hungr.ai.egg-info
+/app/public
 
 # virtualenv
 /env

@@ -3,14 +3,17 @@ import pkg_resources
 from os import environ, path
 from flask import Flask, render_template, send_from_directory, Response
 from flask_webpack import Webpack
+from flask_socketio import SocketIO
 from helper import gen
-from camera_pi import Camera
+from camera import Camera
 
 
-__version__ = pkg_resources.require("demo")[0].version
+__version__ = pkg_resources.require("hungr.ai")[0].version
 here = path.abspath(path.dirname(__file__))
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 debug = "DEBUG" in environ
 
 webpack = Webpack()
@@ -36,4 +39,4 @@ def send_asset(filename):
 
 if __name__ == "__main__":
     app.debug = debug
-    app.run(extra_files=[app.config["WEBPACK_MANIFEST_PATH"]])
+    socketio.run(app, extra_files=[app.config["WEBPACK_MANIFEST_PATH"]])

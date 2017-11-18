@@ -15,7 +15,7 @@ module.exports = {
         ]
     },
     output: {
-        path: path.join(__dirname, "react-flask/public"),
+        path: path.join(__dirname, "app/public"),
         publicPath: "/assets/",
         filename: "[name].[chunkhash].js",
         chunkFilename: "[id].[chunkhash].chunk"
@@ -47,7 +47,7 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin("[name].[chunkhash].css"),
-        new ManifestRevisionPlugin(path.join("react-flask", "manifest.json"), {
+        new ManifestRevisionPlugin(path.join("app", "manifest.json"), {
             rootAssetPath: root,
             ignorePaths: ["/styles", "/scripts"]
         }),
