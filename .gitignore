@@ -7,7 +7,7 @@
 /hungr.ai.egg-info
 
 # virtualenv
-/flask
+/env
 
 # misc
 *.pyc

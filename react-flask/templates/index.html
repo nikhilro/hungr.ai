@@ -2,11 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flask with WebPack</title>
+    <title>Hungrai Hungrai Hippos</title>
     {{ stylesheet_tag("main_css") | safe }}
   </head>
   <body>
     <div id=main></div>
     {{ javascript_tag("app_js") | safe }}
+    <img src="{{ url_for('video_feed') }}">
   </body>
 </html>

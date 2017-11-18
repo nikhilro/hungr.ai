@@ -4,7 +4,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hello, World from WebPack!</h1>
+        <h1>Welcome to Hungrai Hungrai Hippos!</h1>
       </div>
     );
   }
