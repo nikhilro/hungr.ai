@@ -4,7 +4,6 @@ from time import sleep
 BTN = 18
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 class Servo():
@@ -21,6 +20,9 @@ class Servo():
 		self.setAngle(0)
 		sleep(1)
 		self.setAngle(120)
+
+	def stop(self):
+		self.pwm.stop()
 
 
 def move(n):
@@ -44,11 +46,12 @@ def loop():
 
 
 if __name__ == '__main__':		# Program start from here
+	GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	servoY = Servo(17)
+	servoB = Servo(27)
+	servoG = Servo(22)
+	servoO = Servo(23)
 	try:
-		servoY = Servo(17)
-		servoB = Servo(27)
-		servoG = Servo(22)
-		servoO = Servo(23)
 		loop()
 	except KeyboardInterrupt:	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
 		servoY.stop()
