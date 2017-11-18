@@ -28,6 +28,7 @@ def setup():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	servo1 = Servo(17)
+	
 
 def destroy():
 	servo1.stop()
@@ -48,8 +49,8 @@ def loop():
 
 
 if __name__ == '__main__':		# Program start from here
-	setup()
 	try:
+		setup()
 		loop()
 	except KeyboardInterrupt:	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
 		destroy()
