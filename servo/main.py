@@ -1,8 +1,11 @@
 import RPi.GPIO as GPIO
+import PIL
+import picamera
 from time import sleep
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
+BTN = 22
 
 class Servo():
 	def __init__(self, PIN):
@@ -22,17 +25,25 @@ class Servo():
 	def stop(self):
 		self.pwm.stop()
 
+def setup():
+	servo1 = Servo(17)
+	GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 
 def loop():
+	flag = True
 	while True:
-		new_angle = input("set servo angle: ")
-		servo1.setAngle(new_angle)
-		print("servo set to " + new_angle)
+		btnState = GPIO.input(BTN)
+		if btnState == 0:
+			if flag:
+				servo1.setAngle(0)
+			else:
+				servo1.setAngle(180)
+			flag = not flag
 
 
 if __name__ == '__main__':		# Program start from here
 	try:
-		servo1 = Servo(17)
 		loop()
 	except KeyboardInterrupt:	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
 		servo1.stop()
