@@ -15,6 +15,9 @@ setup(
     install_requires=[
         "Flask>=0.10.0",
         "Flask-Webpack>=0.0.7",
-        "Flask-SocketIO>=2.9.2"
+        "Flask-SocketIO>=2.9.2",
+        "Tornado>=4.5.2",
+        "Picamera>=1.13",
+        "Pillow>=4.3.0"
     ]
 )
