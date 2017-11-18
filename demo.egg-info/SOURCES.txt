@@ -6,4 +6,9 @@ demo.egg-info/dependency_links.txt
 demo.egg-info/requires.txt
 demo.egg-info/top_level.txt
 react-flask/__init__.py
+react-flask/manifest.json
+react-flask/public/app_js.2bd9f246a54820434c6d.js
+react-flask/public/app_js.8649e2fb4cba8148aec9.js
+react-flask/public/main_css.e5ba8773734a9c5c5dbf.css
+react-flask/public/main_css.e5ba8773734a9c5c5dbf.js
 react-flask/templates/index.html
