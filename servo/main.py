@@ -18,7 +18,7 @@ class Servo():
 
 	def move(self, angle):
 		self.setAngle(0)
-		sleep(1)
+		sleep(0.75)
 		self.setAngle(120)
 
 	def stop(self):
@@ -26,13 +26,11 @@ class Servo():
 
 
 def move(n):
-	if(n == 1):
-		servoY.move()
-	elif(n == 2):
+	if(n == 'B'):
 		servoB.move()
-	elif(n == 3):
+	elif(n == 'G'):
 		servoG.move()
-	else:
+	elif(n == 'O'):
 		servoO.move()
 
 
@@ -42,19 +40,20 @@ def loop():
 		btnState = GPIO.input(BTN)
 		if btnState == 0:
 			print("button press")
-			move(1)
+			move('B')
+			move('G')
+			move('O')
+			sleep(0.75)
 
 
 if __name__ == '__main__':		# Program start from here
 	GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	servoY = Servo(17)
-	servoB = Servo(27)
+	servoB = Servo(17)
 	servoG = Servo(22)
 	servoO = Servo(23)
 	try:
 		loop()
 	except KeyboardInterrupt:	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-		servoY.stop()
 		servoB.stop()
 		servoG.stop()
 		servoO.stop()
