@@ -1,9 +1,17 @@
 import RPi.GPIO as GPIO
 import PIL
 import picamera
+import io
 from time import sleep
 
-BTN = 22
+BTN = 18
+
+stream = io.BytesIO()
+with picamera.PiCamera() as camera:
+    camera.resolution = (640, 640)
+    camera.start_recording(stream, format='h264', quality=23)
+    camera.wait_recording(15)
+    camera.stop_recording()
 
 class Servo():
 	def __init__(self, PIN):
@@ -17,21 +25,37 @@ class Servo():
 		self.pwm.ChangeDutyCycle(set_angle)
 		self.angle = set_angle
 
-	def adjustAngle(self, angle):
-		self.setAngle(self.angle + angle)
+	def move(self, angle):
+		self.setAngle(0)
+		sleep(1)
+		self.setAngle(120)
 
-	def stop(self):
-		self.pwm.stop()
+def move(n):
+	if(n == 1):
+		servoY.move()
+	else if(n == 2):
+		servoB.move()
+	else if(n == 3):
+		servoG.move()
+	else:
+		servoO.move()
+
 
 def setup():
 	GPIO.setwarnings(False)
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	servo1 = Servo(17)
+	servoY = Servo(17)
+	servoB = Servo(27)
+	servoG = Servo(22)
+	servoO = Servo(23)
 	
 
 def destroy():
-	servo1.stop()
+	servoY.stop()
+	servoB.stop()
+	servoG.stop()
+	servoO.stop()
 	GPIO.cleanup()
 
 def loop():
@@ -41,11 +65,7 @@ def loop():
 		btnState = GPIO.input(BTN)
 		if btnState == 0:
 			print("button press")
-			if flag:
-				servo1.setAngle(0)
-			else:
-				servo1.setAngle(180)
-			flag = not flag
+			move(1)	
 
 
 if __name__ == '__main__':		# Program start from here
