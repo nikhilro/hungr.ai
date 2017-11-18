@@ -28,7 +28,6 @@ def loop():
 		new_angle = input("set servo angle: ")
 		servo1.setAngle(new_angle)
 		print("servo set to " + new_angle)
-		
 
 
 if __name__ == '__main__':		# Program start from here
