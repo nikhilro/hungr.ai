@@ -1,0 +1,4 @@
+include react-flask/manifest.json
+
+recursive-include react-flask/templates *.html
+recursive-include react-flask/public *.js *.css
