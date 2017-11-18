@@ -5,12 +5,25 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hungrai Hungrai Hippos</title>
-    {{ stylesheet_tag("main_css") | safe }}
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+    {{ stylesheet_tag("style_css") | safe }}
+    {{ stylesheet_tag("main_css") | safe }}
   </head>
   <body>
     <div id=main></div>
     {{ javascript_tag("app_js") | safe }}
-    <img src="{{ url_for('video_feed') }}">
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('connect', function() {
+            socket.emit('message', 'Hello');
+            socket.emit('my event', {data: 'I\'m connected!'});
+        }, (a, b) => console.log(a + b));
+        socket.on('my response', msg => {
+          console.log('msg', msg);
+        })
+    </script>
   </body>
 </html>

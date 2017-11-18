@@ -12,6 +12,9 @@ module.exports = {
         ],
         main_css: [
             root + "/styles/main.scss"
+        ],
+        style_css: [
+          root + "/styles/styles.css"
         ]
     },
     output: {
@@ -21,7 +24,7 @@ module.exports = {
         chunkFilename: "[id].[chunkhash].chunk"
     },
     resolve: {
-        extensions: [".js", ".jsx", ".scss"]
+        extensions: [".js", ".jsx", ".scss", ".css"]
     },
     module: {
         loaders: [
@@ -35,12 +38,20 @@ module.exports = {
                 loader: ExtractTextPlugin.extract("css-loader!sass-loader")
             },
             {
-              test: /\.jsx?$/,
+              test: /\.css$/i,
+              loader: 'style-loader'
+            },
+            {
+              test: /\.css$/i,
+              loader: 'css-loader'
+            },
+            {
+              test: /\.jsx?$/i,
               loader: 'babel-loader',
               exclude: /node_modules/,
               query:
                 {
-                  presets:['react', 'env']
+                  presets:['react', 'env', 'stage-1']
                 }
             }
         ]
