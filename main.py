@@ -6,9 +6,8 @@ GPIO.setmode(GPIO.BCM)
 
 class Servo():
 	def __init__(self, PIN):
-		self.PIN = PIN
-		GPIO.setup(self.PIN, GPIO.OUT)
-		self.pwm = GPIO.PWM(self.PIN, 50)
+		GPIO.setup(PIN, GPIO.OUT)
+		self.pwm = GPIO.PWM(PIN, 50)
 		self.pwm.start(7.5)
 		self.angle = 0
 
@@ -28,6 +27,7 @@ def loop():
 	while True:
 		new_angle = input("set servo angle: ")
 		servo1.setAngle(new_angle)
+		print("servo set to " + new_angle)
 		
 
 
