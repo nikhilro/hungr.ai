@@ -14,6 +14,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "Flask>=0.10.0",
-        "Flask-Webpack>=0.0.7"
+        "Flask-Webpack>=0.0.7",
+        "Flask-SocketIO>=2.9.2"
     ]
 )

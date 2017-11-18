@@ -1,14 +1,15 @@
 {
-  "name": "react-flask",
+  "name": "app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "python react-flask/__init__.py",
+    "start": "python3 app/__init__.py || python app/__init__.py",
     "webpack": "webpack --progress --verbose --colors --display-error-details",
-    "python-setup": "python setup.py install",
-    "build": "npm run webpack && npm install && npm run python-setup"
+    "pysetup": "python3 setup.py install || python setup.py install",
+    "build": "npm run webpack && npm install && npm run pysetup",
+    "venv": "virtualenv -p python3 env"
   },
   "author": "",
   "license": "ISC",
