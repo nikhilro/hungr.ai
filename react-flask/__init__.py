@@ -1,8 +1,10 @@
 import pkg_resources
 
 from os import environ, path
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, Response
 from flask_webpack import Webpack
+from helper import gen
+from camera_pi import Camera
 
 
 __version__ = pkg_resources.require("demo")[0].version
@@ -20,6 +22,12 @@ webpack.init_app(app)
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route("/assets/<path:filename>")
