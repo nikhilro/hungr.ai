@@ -2,6 +2,8 @@
 
 Our HackWestern IV project which modifies hungry hungry hippo
 
+![Hippo1](https://media.giphy.com/media/xT0xeljtvMFDP0po2c/giphy.gif)
+
 # Dev Setup
 *Make sure you have Python3*
 1. `npm run venv`
