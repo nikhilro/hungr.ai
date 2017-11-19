@@ -52,7 +52,7 @@ def send_asset(filename):
 @socketio.on('readCamera')
 def read_camera():
     print('Reading camera...')
-    Camera().get_frame(socketio)
+    # Camera().get_frame(socketio)
 
 
 if __name__ == "__main__":
