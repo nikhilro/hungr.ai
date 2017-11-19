@@ -21,11 +21,11 @@ class Camera():
         sio = io.BytesIO()
 
         while True:
-            time.sleep(5)
+            time.sleep(0.1)
             _, frame = camera.read()
             img = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
             img.save(sio, format="JPEG")
-            sio.seek(0)
+            # sio.seek(0)
 
             # encode as jpg and return
             # return cv2.imencode('.jpg', img)[1].tobytes()
