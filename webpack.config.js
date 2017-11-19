@@ -10,11 +10,38 @@ module.exports = {
         app_js: [
             root + "/scripts/app.js"
         ],
+        bootstrap_js: [
+            root + "/scripts/bootstrap.js"
+        ],
+        jquery_js: [
+            root + "/scripts/jquery.1.8.3.min.js"
+        ],
+        jquery_ease_js: [
+            root + "/scripts/jquery.easing.1.3.js"
+        ],
+        jquery_isotope_js: [
+            root + "/scripts/jquery.isotope.js"
+        ],
+        classie_js: [
+            root + "/scripts/classie.js"
+        ],
         main_css: [
             root + "/styles/main.scss"
         ],
-        style_css: [
+        styles_css: [
           root + "/styles/styles.css"
+        ],
+        bootstrap_css: [
+          root + "/styles/bootstrap.css"
+        ],
+        font_awesome_css: [
+          root + "/styles/font-awesome.css"
+        ],
+        responsive_css: [
+          root + "/styles/responsive.css"
+        ],
+        animate_css: [
+          root + "/styles/animate.css"
         ]
     },
     output: {
@@ -39,11 +66,14 @@ module.exports = {
             },
             {
               test: /\.css$/i,
-              loader: 'style-loader'
+              use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: 'css-loader'
+              })),
             },
             {
-              test: /\.css$/i,
-              loader: 'css-loader'
+              test: /\.(ttf|otf|eot|svg|woff)$/i,
+              loader: 'file-loader'
             },
             {
               test: /\.jsx?$/i,
@@ -53,8 +83,20 @@ module.exports = {
                 {
                   presets:['react', 'env', 'stage-1']
                 }
+            },
+            {
+              test: /\.(gif|png|jpe?g|svg)$/i,
+              use: [
+                'file-loader',
+                {
+                  loader: 'image-webpack-loader',
+                  options: {
+                    bypassOnDebug: true,
+                  },
+                },
+              ],
             }
-        ]
+        ],
     },
     plugins: [
         new ExtractTextPlugin("[name].[chunkhash].css"),
