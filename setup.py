@@ -18,6 +18,7 @@ setup(
         "Flask-SocketIO>=2.9.2",
         "Tornado>=4.5.2",
         "Picamera>=1.13",
-        "Pillow>=4.3.0"
+        "Pillow>=4.3.0",
+        "Flask-SockJS>=0.1.0"
     ]
 )
