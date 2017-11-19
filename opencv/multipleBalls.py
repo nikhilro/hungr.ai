@@ -4,6 +4,7 @@ import numpy as np
 import argparse
 import imutils
 import cv2
+import ball
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -42,7 +43,6 @@ while True:
     # resize the frame, blur it, and convert it to the HSV
     # color space
     frame = imutils.resize(frame, width=600)
-    frame = imutils.resize(frame, height=600)
     # blurred = cv2.GaussianBlur(frame, (11, 11), 0)
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -58,7 +58,7 @@ while True:
                             cv2.CHAIN_APPROX_SIMPLE)[-2]
 
     # only proceed if at least one contour was found
-    for i in cnts:
+    for i in range(0,len(cnts)):
         # find the largest contour in the mask, then use
         # it to compute the minimum enclosing circle and
         # centroid
@@ -78,13 +78,13 @@ while True:
             # cv2.circle(frame, center, 5, (0, 0, 255), -1)
 
     # update the points queue
-    pts.appendleft(center)
+    #pts.appendleft(center)
     # loop over the set of tracked points
-    for i in xrange(1, len(pts)):
+    #for i in xrange(1, len(pts)):
         # if either of the tracked points are None, ignore
         # them
-        if pts[i - 1] is None or pts[i] is None:
-            continue
+        #if pts[i - 1] is None or pts[i] is None:
+        #   continue
 
         # otherwise, compute the thickness of the line and
         # draw the connecting lines
