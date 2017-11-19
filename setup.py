@@ -19,6 +19,6 @@ setup(
         "Tornado>=4.5.2",
         "Picamera>=1.13",
         "Pillow>=4.3.0",
-        "Flask-SockJS>=0.1.0"
+        "TornadIO>=0.0.5"
     ]
 )
