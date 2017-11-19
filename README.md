@@ -2,6 +2,12 @@
 
 Our HackWestern IV project which modifies hungry hungry hippo
 
+# Milestones
+
+![Hippo servo works for the first time!](https://media.giphy.com/media/3ohs7XuaLgNsrJbila/giphy.gif)
+![Hippos eat the balls for the first time!! Yipee!](https://media.giphy.com/media/xT0xeljtvMFDP0po2c/giphy.gif)
+
+
 # Dev Setup
 *Make sure you have Python3*
 1. `npm run venv`
