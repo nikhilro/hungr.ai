@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:build": "(python3 app/__init__.py || python app/__init__.py) && webpack",
+    "start:build": "webpack && (python3 app/__init__.py || python app/__init__.py)",
     "start": "python app/__init__.py",
     "webpack": "webpack --progress --verbose --colors --display-error-details",
     "pysetup": "python3 setup.py install || python setup.py install",

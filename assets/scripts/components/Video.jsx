@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import openSocket from 'socket.io-client';
 
-// const socket = openSocket('http://localhost:8000');
+// const socket = openSocket("ws://" + window.location.hostname + ":" + port + "/websocket");
 
 
 export default class Video extends Component {
@@ -16,6 +16,17 @@ export default class Video extends Component {
     this.state = {
       'data': ""
     }
+
+    // socket.onopen = function () {
+    //     console.log("Socket connected!");
+    //     socket.send('read_camera');
+    // };
+    //
+    // socket.onmessage = function (messageEvent) {
+    //   this.setState({
+    //     'data': "data:image/jpeg;base64," + messageEvent.data
+    //   });
+    // };
 
     // socket.on('connect', function() {
     //     console.log('Socket connected!');

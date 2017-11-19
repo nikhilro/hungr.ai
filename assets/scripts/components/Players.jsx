@@ -11,18 +11,6 @@ export default class Players extends Component {
     total: PropTypes.number
   };
 
-  constructor(props) {
-    super(props);
-
-    setPlayers(props.players, playerList => {
-      this.state = {
-        players: playerList,
-        ballCount: 0,
-        total: 0
-      }
-    });
-  }
-
   setPlayers(players, callback) {
     callback(players.map(player => {
               return (
@@ -36,8 +24,21 @@ export default class Players extends Component {
             }));
   }
 
+  constructor(props) {
+    super(props);
+
+
+    this.setPlayers(this.props.players, playerList => {
+      this.state = {
+        players: playerList,
+        ballCount: 0,
+        total: 0
+      }
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
-    setPlayers(nextProps.players, playerList => {
+    this.setPlayers(nextProps.players, playerList => {
       this.setState({
         players: playerList,
         ballCount: nextProps.ballCount

@@ -108,3 +108,118 @@ if __name__ == "__main__":
     app.debug = debug
     app.run(extra_files=[app.config["WEBPACK_MANIFEST_PATH"]])
     # socketio.run(app, extra_files=[app.config["WEBPACK_MANIFEST_PATH"]])
+
+# #!/usr/bin/env python
+# """
+# Creates an HTTP server with basic auth and websocket communication.
+# """
+# import argparse
+# import base64
+# import os
+# import webbrowser
+# from os import path
+#
+# try:
+#     import cStringIO as io
+# except ImportError:
+#     import io
+#
+# from tornado_cors import CorsMixin
+# import tornado.web
+# import tornado.websocket
+# from tornado.ioloop import PeriodicCallback
+#
+# # Hashed password for comparison and a cookie for login cache
+# ROOT = os.path.normpath(os.path.dirname(__file__))
+# here = path.abspath(path.dirname(__file__))
+# WEBCAM = True
+# port = 8000
+#
+#
+# class IndexHandler(CorsMixin, tornado.web.RequestHandler):
+#
+#     def get(self):
+#         template_path = path.join(here, "manifest.json")
+#         self.ctx.eval_string('React.renderToString(React.createElement(Components.Hello));')
+#         self.write(self.ctx.get())
+#         self.ctx.pop()
+#         self.render("templates/index.html", port=port)
+#
+#
+# class WebSocket(tornado.websocket.WebSocketHandler):
+#
+#     def on_message(self, message):
+#         """Evaluates the function pointed to by json-rpc."""
+#
+#         # Start an infinite loop when this is called
+#         if message == "read_camera":
+#             self.camera_loop = PeriodicCallback(self.loop, 10)
+#             self.camera_loop.start()
+#
+#         # Extensibility for other methods
+#         else:
+#             print("Unsupported function: " + message)
+#
+#     def loop(self):
+#         """Sends camera images in an infinite loop."""
+#         sio = io.StringIO()
+#
+#         if WEBCAM:
+#             _, frame = camera.read()
+#             try:
+#                 img = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+#                 img.save(sio, "JPEG")
+#             except Exception:
+#                 print('empty file')
+#         else:
+#             camera.capture(sio, "jpeg", use_video_port=True)
+#
+#         try:
+#             self.write_message(base64.b64encode(sio.getvalue()))
+#         except tornado.websocket.WebSocketClosedError:
+#             self.camera_loop.stop()
+#
+#
+# parser = argparse.ArgumentParser(description="Starts a webserver that "
+#                                  "connects to a webcam.")
+# parser.add_argument("--port", type=int, default=8000, help="The "
+#                     "port on which to serve the website.")
+# parser.add_argument("--resolution", type=str, default="low", help="The "
+#                     "video resolution. Can be high, medium, or low.")
+# parser.add_argument("--require-login", action="store_true", help="Require "
+#                     "a password to log in to webserver.")
+# parser.add_argument("--use-usb", action="store_true", help="Use a USB "
+#                     "webcam instead of the standard Pi camera.")
+# parser.add_argument("--usb-id", type=int, default=0, help="The "
+#                      "usb camera number to display")
+# args = parser.parse_args()
+#
+# if WEBCAM:
+#     import cv2
+#     from PIL import Image
+#     camera = cv2.VideoCapture(args.usb_id)
+# else:
+#     import picamera
+#     camera = picamera.PiCamera()
+#     camera.start_preview()
+#
+# resolutions = {"high": (1280, 720), "medium": (640, 480), "low": (320, 240)}
+# if args.resolution in resolutions:
+#     if WEBCAM:
+#         w, h = resolutions[args.resolution]
+#         camera.set(3, w)
+#         camera.set(4, h)
+#     else:
+#         camera.resolution = resolutions[args.resolution]
+# else:
+#     raise Exception("%s not in resolution options." % args.resolution)
+#
+# handlers = [(r"/", IndexHandler),
+#             (r"/websocket", WebSocket),
+#             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': ROOT})]
+# application = tornado.web.Application(handlers)
+# application.listen(port)
+#
+# webbrowser.open("http://localhost:%d/" % port, new=2)
+#
+# tornado.ioloop.IOLoop.instance().start()

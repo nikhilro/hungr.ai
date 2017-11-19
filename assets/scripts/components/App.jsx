@@ -39,7 +39,7 @@ export default class App extends Component {
         <Banner />
         <div className="game-wrapper">
           <Players
-            players={players}
+            players={this.state.players}
             ballCount={0}
             total={16}
             />
