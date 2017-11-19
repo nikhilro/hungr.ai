@@ -1,9 +1,10 @@
 import pkg_resources
 
 from os import environ, path
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 from flask_webpack import Webpack
 from flask_socketio import SocketIO
+from opencv.multipleBalls
 # from camera import Camera
 
 
@@ -36,12 +37,16 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/img", methods=['POST'])
+def set_image():
+    data = request.get_json()['data']
+
+
 # @app.route('/video_feed')
 # def video_feed():
 #     return Response(gen(Camera()),
 #                     mimetype='multipart/x-mixed-replace; boundary=frame')
 # <!-- <img src="{{ url_for('video_feed') }}"> -->
-
 
 @app.route("/assets/<path:filename>")
 def send_asset(filename):

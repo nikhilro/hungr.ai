@@ -26,11 +26,14 @@ hippos = []
 fps = 40
 first = True
 
-# 0 - orange , 1 = green, 2 = yellow
-for i in range(0, 3):
-    temp = Hippo(i)
-    hippos.append(temp)
 
+class MultipleBalls():
+    def __init__(self):
+        # 0 - orange , 1 = green, 2 = yellow
+        for i in range(0, 3):
+            temp = Hippo(i)
+            hippos.append(temp)
+            
 # if a video path was not supplied, grab the reference
 # to the webcam
 if not args.get("video", False):
