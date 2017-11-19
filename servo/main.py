@@ -1,19 +1,28 @@
 import RPi.GPIO as GPIO
 from time import sleep
 import thread
+import socket
+import struct
 
 BTN = 18
 YELLOW = 0
 GREEN = 1
 ORANGE = 2
+TCP_IP = '127.0.0.1'
+TCP_PORT = 25565
+BUFFER_SIZE = 4
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
+
 def servo_thread(servo_id):
 	while True:
-		if(socket_arr[servo_id]):
+            data = s.recv(BUFFER_SIZE)
+            data = struct.unpack('????',data)
+            print("received data:", data)
+		if(data[servo_id]):
 			servo_arr[servo_id].move()
-			socket_arr[servo_id] = False
+			data[servo_id] = False
 
 
 class Servo():
@@ -36,6 +45,8 @@ class Servo():
 
 
 if __name__ == '__main__':		# Program start from here
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((TCP_IP, TCP_PORT))
 	GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	y = Servo(17)
 	g = Servo(22)
