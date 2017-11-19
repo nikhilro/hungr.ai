@@ -4,7 +4,9 @@ import numpy as np
 import argparse
 import imutils
 import cv2
-import ball
+from ball import Ball
+from vector import Vector
+from hippo import Hippo
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -20,7 +22,14 @@ redLower = (0, 136, 162)
 redUpper = (255, 255, 255)
 pts = deque(maxlen=args["buffer"])
 arrBalls = []
-fps= 40
+hippos = []
+fps = 40
+first = true
+
+# 0 - orange , 1 = green, 2 = yellow
+for i in range(0,3):
+    temp = Hippo(i)
+    hippos.append(temp)
 
 # if a video path was not supplied, grab the reference
 # to the webcam
@@ -58,7 +67,7 @@ while True:
                             cv2.CHAIN_APPROX_SIMPLE)[-2]
 
     # only proceed if at least one contour was found
-    for i in range(0,len(cnts)):
+    for i in range(0, len(cnts)):
         # find the largest contour in the mask, then use
         # it to compute the minimum enclosing circle and
         # centroid
@@ -66,8 +75,24 @@ while True:
         ((x, y), radius) = cv2.minEnclosingCircle(cnts[i])
         # M = cv2.moments(cnts[i])
         # center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
-        x = Ball(Vector(x,y),radius, fps, 600)
-        arrBalls.append(x)
+        if first:
+            temp = Ball(Vector(x, y), radius, fps, 600)
+            arrBalls.append(temp)
+        else:
+            # Make it more sophisticated
+            for j in range(0, len(arrBalls)):
+                a = numpy.array(arrBall[j].pos.x, arrBall[j].pos.y)
+                b = numpy.array(x,y)
+                if numpy.linalg.norm(a-b) <= 2*arrBall[j].radius:
+                    arrBall[j].update(Vector(x,y))
+
+                    if not hippos[0].move:
+                        hippos[0].chomp(arrBall[j].bool)
+
+
+            #HOW TO SEND THIS DATA ? LINE 124
+
+        first = false
 
         # only proceed if the radius meets a minimum size
         if radius > 10:
@@ -77,27 +102,36 @@ while True:
                        (0, 255, 255), 2)
             # cv2.circle(frame, center, 5, (0, 0, 255), -1)
 
-    # update the points queue
-    #pts.appendleft(center)
-    # loop over the set of tracked points
-    #for i in xrange(1, len(pts)):
-        # if either of the tracked points are None, ignore
-        # them
-        #if pts[i - 1] is None or pts[i] is None:
-        #   continue
+            # update the points queue
+            # pts.appendleft(center)
+            # loop over the set of tracked points
+            # for i in xrange(1, len(pts)):
+            # if either of the tracked points are None, ignore
+            # them
+            # if pts[i - 1] is None or pts[i] is None:
+            #   continue
 
-        # otherwise, compute the thickness of the line and
-        # draw the connecting lines
-        # thickness = int(np.sqrt(args["buffer"] / float(i + 1)) * 2.5)
-        # cv2.line(frame, pts[i - 1], pts[i], (0, 0, 255), thickness)
+            # otherwise, compute the thickness of the line and
+            # draw the connecting lines
+            # thickness = int(np.sqrt(args["buffer"] / float(i + 1)) * 2.5)
+            # cv2.line(frame, pts[i - 1], pts[i], (0, 0, 255), thickness)
+
+
 
     # show the frame to our screen
     cv2.imshow("Frame", frame)
-    key = cv2.waitKey(1) & 0xFF
 
-    # if the 'q' key is pressed, stop the loop
-    if key == ord("q"):
-        break
+    for i in range(0,len(arrBalls)):
+        if not arrBalls[i].endCheck:
+            n = arrBalls[i].lastCheck
+            arrBalls.pop(i)
+            if not n == 3:
+                hippos[n].counter()
+                
+    for i in range(0,3):
+        #SEND HIPPO DATA
+        hippos[i].update
+
 
 # cleanup the camera and close any open windows
 camera.release()

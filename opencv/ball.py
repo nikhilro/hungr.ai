@@ -1,5 +1,7 @@
 import math
-import vector
+import numpy as np
+from vector import Vector
+
 
 class Ball(object):
     def __init__(self, p, radius, fps, resolution):
@@ -12,9 +14,12 @@ class Ball(object):
         self.acc = None
         self.fps = fps
         self.resolution = resolution
+        self.exists = false;
 
     def update(self, p):
         """ Takes new location of the ball as a vector """
+        self.exists = true;
+
         if self.pos:
             self.lastPos = self.pos
         self.pos = p
@@ -37,7 +42,33 @@ class Ball(object):
             predict = predict + self._div_(self.acc, 0.5 * (pow(ffs, 2)))
             predict = predict + self.pos
 
-            if predict.x <= self.resolution / 3 and predict.y - (2 / 5 * self.resolution) <= (1 / 5 * self.resolution) and predict.y >= 0:
+            if predict.x <= self.resolution / 3 and predict.y - (2 / 5 * self.resolution) <= (
+                    1 / 5 * self.resolution) and predict.y >= 0:
                 return true
         else:
             return false
+
+    def endCheck(self):
+        if self.exists:
+            self.exists = false
+            return true
+        else:
+            return false
+
+    def lastSeen(self):
+        a = numpy.array(self.pos.x, self.pos.y)
+        arr = []
+
+        b = numpy.array(0, self.resolution/2)
+        arr.append(numpy.linalg.norm(a-b))
+
+        b = numpy.array(self.resolution/2, 0)
+        arr.append(numpy.linalg.norm(a - b))
+
+        b = numpy.array(self.resolution, self.resolution/2)
+        arr.append(numpy.linalg.norm(a - b))
+
+        b = numpy.array(self.resolution/2, self.resolution)
+        arr.append(numpy.linalg.norm(a - b))
+
+        return arr.index(min(arr))
