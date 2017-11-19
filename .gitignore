@@ -6,6 +6,7 @@
 /dist
 /hungr.ai.egg-info
 /app/public
+/app/__pycache__
 
 # virtualenv
 /env
