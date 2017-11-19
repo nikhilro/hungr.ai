@@ -1,4 +1,4 @@
-.content-wrapper {
+/*.content-wrapper {
   margin-top: 30px;
   height: 100%;
   display: flex;
@@ -11,4 +11,250 @@
 
 .content {
   width: 70%;
+}*/
+/*
+    Theme Name: Knight
+    Theme URL: https://bootstrapmade.com/knight-free-bootstrap-theme/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+*/
+
+/* CSS Document */
+
+/* Float Elements
+---------------------------------*/
+.fl-lt {float:left;}
+.fl-rt {float:right;}
+
+/* Clear Floated Elements
+---------------------------------*/
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.figure{ margin:0px;}
+
+img{ max-width:100%;}
+
+a, a:hover, a:active{ outline:0px !important}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.1.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Primary Styles
+---------------------------------*/
+html {
+  height: 100%;
+}
+
+body {
+	background: black;
+	font-family: 'Open Sans', sans-serif;
+	font-size:14px;
+	font-weight:normal;
+	color:#888888;
+  height: 100%;
+	margin:0;
+}
+
+/* Header Styles
+---------------------------------*/
+
+.header{
+	text-align:center;
+  height: 100%;
+  display: flex;
+}
+.logo{
+	width:130px;
+	margin:0 auto 35px;
+}
+.header h1{
+	font-family: 'Montserrat',sans-serif;
+	font-size:50px;
+	font-weight:400;
+	letter-spacing: -1px;
+	margin:0 0 22px 0 ;
+	color:#fff;
+}
+
+.we-create{
+	padding:0;
+	margin:35px 0 55px;
+}
+.wp-pic{
+	margin-bottom:20px;
+}
+.we-create li{
+	display:inline-block;
+	font-family: 'Montserrat',sans-serif;
+	font-size:14px;
+	color: #bcbcbc;
+	text-transform: uppercase;
+	font-weight: 400;
+	margin:0 5px 0 0;
+	padding:0 0 0 15px;
+}
+.we-create li:first-child{
+	background:none;
+}
+
+
+.link{
+	padding:15px 35px;
+	background:#7cc576;
+	color:#fff !important;
+	font-size:16px;
+	font-weight:400;
+	font-family: 'Montserrat', sans-serif;
+	display:inline-block;
+	border-radius:3px;
+  cursor: pointer;
+	text-transform:uppercase;
+	line-height:25px;
+	margin-bottom:20px;
+	transition:all 0.3s ease-in-out;
+	-moz-transition:all 0.3s ease-in-out;
+	-webkit-transition:all 0.3s ease-in-out;
+}
+.link:hover {
+	text-decoration:none;
+	color:#7cc576 !important;
+	background:#fff;
+}
+
+.link:active, .link:focus {
+	background: #7cc576;
+	text-decoration:none;
+	color:#fff !important;
+}
+
+#main {
+  height: 100%;
+}
+
+.container {
+  margin: auto;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.banner {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  background-color: #76d9ed;
+}
+
+.banner h1 {
+  margin: auto;
+}
+
+.game-wrapper {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+}
+
+.players {
+  width: 25%;
+  height: 100%;
+  color: white;
+}
+
+.game {
+  width: 75%;
+  height: 100%;
+  background-color: white;
+}
+
+.hippo {
+  margin: auto;
+  width: 90%;
+}
+
+.hippo-name {
+  float: left;
+}
+
+.hippo-score {
+  float: right;
+}
+
+
+
+/* Animation Timers
+---------------------------------*/
+.delay-02s {
+	animation-delay: 0.2s;
+	-webkit-animation-delay: 0.2s;
+}
+.delay-03s {
+	animation-delay: 0.3s;
+	-webkit-animation-delay: 0.3s;
+}
+.delay-04s {
+	animation-delay: 0.4s;
+	-webkit-animation-delay: 0.4s;
+}
+
+.delay-05s {
+	animation-delay: 0.5s;
+	-webkit-animation-delay: 0.5s;
+}
+.delay-06s {
+	animation-delay: 0.6s;
+	-webkit-animation-delay: 0.6s;
+}
+
+.delay-07s {
+	animation-delay: 0.7s;
+	-webkit-animation-delay: 0.7s;
+}
+.delay-08s {
+	animation-delay: 0.8s;
+	-webkit-animation-delay: 0.8s;
+}
+
+.delay-09s {
+	animation-delay: 0.9s;
+	-webkit-animation-delay: 0.9s;
+}
+.delay-1s {
+	animation-delay: 1s;
+	-webkit-animation-delay: 1s;
+}
+.delay-12s {
+	animation-delay: 1.2s;
+	-webkit-animation-delay: 1.2s;
 }
