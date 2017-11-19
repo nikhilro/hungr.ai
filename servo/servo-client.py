@@ -4,6 +4,7 @@ import thread
 import socket
 import struct
 import threading
+import sys
 
 BTN = 18
 YELLOW = 0
@@ -40,8 +41,8 @@ class Servo():
 		self.setAngle(120)
 		sleep(0.6)
 		
-
 	def stop(self):
+		self.setAngle(0)
 		self.pwm.stop()
 
 
@@ -59,15 +60,18 @@ if __name__ == '__main__':		# Program start from here
 		thread.start_new_thread(servo_thread, ("t-yellow", YELLOW))
 		thread.start_new_thread(servo_thread, ("t-green",GREEN))
 		thread.start_new_thread(servo_thread, ("t-orange",ORANGE))
-		while True:
+		btnState = 1
+		while btnState != 0:
+			btnState = GPIO.input(BTN)
 			rec_data = s.recv(BUFFER_SIZE)
-    			data = list(struct.unpack('????',rec_data))
+    		data = list(struct.unpack('????',rec_data))
+    	sys.exit(0)
     		#	print("received data:", rec_data)
 		#	print(threading.activeCount())
 	except KeyboardInterrupt:	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
 		servo_arr[YELLOW].stop()
 		servo_arr[GREEN].stop()
-		servo_arr[ORGANGE].stop()
+		servo_arr[ORANGE].stop()
 		cleanup_stop_thread()
 		s.close()
 		GPIO.cleanup()
