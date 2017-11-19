@@ -3,6 +3,8 @@ import base64
 import time
 # from base_camera import BaseCamera
 from PIL import Image
+import picamera
+
 
 try:
     import cStringIO as io
@@ -13,8 +15,15 @@ except ImportError:
 class Camera():
     @staticmethod
     def get_frame(socketio):
-        camera = cv2.VideoCapture(0)
-        camera.set(cv2.CAP_PROP_FPS, 30)
+        camera = picamera.PiCamera()
+        camera.start_preview()
+        camera.resolution(720, 720)
+        camera.framerate = 40
+        camera.hflip = True
+        camera.vflip = True
+        camera.start_preview()
+        # camera = cv2.VideoCapture(0)
+        # camera.set(cv2.CAP_PROP_FPS, 30)
         if not camera.isOpened():
             raise RuntimeError('Could not start camera.')
 
@@ -32,3 +41,4 @@ class Camera():
             socketio.emit('videoStart', {
                 "data": base64.b64encode(sio.getvalue())
             })
+        camera.stop_preview()
