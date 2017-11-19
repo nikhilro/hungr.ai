@@ -1,4 +1,5 @@
 import math
+import vector
 
 class Ball(object):
     def __init__(self, p, radius, fps, resolution):
