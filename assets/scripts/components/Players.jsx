@@ -14,28 +14,34 @@ export default class Players extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      players: [],
-      ballCount: 0,
-      total: 0
-    }
-  }
-
-  setPlayers(players) {
-    this.setState({
-      players: players.map(player => {
-                return <Hippo
-                    name={player.name}
-                    score={player.score}
-                  />;
-              })
+    setPlayers(props.players, playerList => {
+      this.state = {
+        players: playerList,
+        ballCount: 0,
+        total: 0
+      }
     });
   }
 
+  setPlayers(players, callback) {
+    callback(players.map(player => {
+              return (
+                <li>
+                  <Hippo
+                      name={player.name}
+                      score={player.score}
+                    />
+                </li>
+              );
+            }));
+  }
+
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      players: nextProps.players,
-      ballCount: nextProps.ballCount
+    setPlayers(nextProps.players, playerList => {
+      this.setState({
+        players: playerList,
+        ballCount: nextProps.ballCount
+      });
     });
   }
 
@@ -47,18 +53,7 @@ export default class Players extends Component {
            </div>
 
            <ul class="list-unstyled components">
-               <li class="active"><a href="#">Home</a></li>
-               <li><a href="#">About</a></li>
-               <li>
-                   <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                   <ul class="collapse list-unstyled" id="homeSubmenu">
-                       <li><a href="#">Page</a></li>
-                       <li><a href="#">Page</a></li>
-                       <li><a href="#">Page</a></li>
-                   </ul>
-                </li>
-               <li><a href="#">Portfolio</a></li>
-               <li><a href="#">Contact</a></li>
+               { this.state.players }
            </ul>
        </nav>
     );

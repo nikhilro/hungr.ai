@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import Video from './Video';
+import { Button } from 'react-bootstrap';
 
 export default class Game extends Component {
 
@@ -18,7 +19,10 @@ export default class Game extends Component {
 
   render() {
     return (
-      <div className="game">Game</div>
+      <div className="game">
+        <Video />
+        <Button bsStyle="primary" bsSize="large" block>Chomp!</Button>
+      </div>
     );
   }
 

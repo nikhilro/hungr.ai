@@ -4,7 +4,7 @@ from os import environ, path
 from flask import Flask, render_template, send_from_directory
 from flask_webpack import Webpack
 from flask_socketio import SocketIO
-from camera import Camera
+# from camera import Camera
 
 
 __version__ = pkg_resources.require("hungr.ai")[0].version

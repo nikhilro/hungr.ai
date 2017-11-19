@@ -1,6 +1,6 @@
 # import the necessary packages
 from collections import deque
-import numpy as np
+import numpy
 import argparse
 import imutils
 import cv2
@@ -24,10 +24,10 @@ pts = deque(maxlen=args["buffer"])
 arrBalls = []
 hippos = []
 fps = 40
-first = true
+first = True
 
 # 0 - orange , 1 = green, 2 = yellow
-for i in range(0,3):
+for i in range(0, 3):
     temp = Hippo(i)
     hippos.append(temp)
 
@@ -81,18 +81,17 @@ while True:
         else:
             # Make it more sophisticated
             for j in range(0, len(arrBalls)):
-                a = numpy.array(arrBall[j].pos.x, arrBall[j].pos.y)
-                b = numpy.array(x,y)
-                if numpy.linalg.norm(a-b) <= 2*arrBall[j].radius:
-                    arrBall[j].update(Vector(x,y))
+                a = numpy.array(arrBalls[j].pos.x, arrBalls[j].pos.y)
+                b = numpy.array(x, y)
+                if numpy.linalg.norm(a-b) <= 2*arrBalls[j].radius:
+                    arrBalls[j].update(Vector(x, y))
 
                     if not hippos[0].move:
-                        hippos[0].chomp(arrBall[j].bool)
+                        hippos[0].chomp(arrBalls[j].bool)
 
+        # HOW TO SEND THIS DATA ? LINE 124
 
-            #HOW TO SEND THIS DATA ? LINE 124
-
-        first = false
+        first = False
 
         # only proceed if the radius meets a minimum size
         if radius > 10:
@@ -116,20 +115,18 @@ while True:
             # thickness = int(np.sqrt(args["buffer"] / float(i + 1)) * 2.5)
             # cv2.line(frame, pts[i - 1], pts[i], (0, 0, 255), thickness)
 
-
-
     # show the frame to our screen
     cv2.imshow("Frame", frame)
 
-    for i in range(0,len(arrBalls)):
+    for i in range(0, len(arrBalls)):
         if not arrBalls[i].endCheck:
             n = arrBalls[i].lastCheck
             arrBalls.pop(i)
             if not n == 3:
                 hippos[n].counter()
-                
-    for i in range(0,3):
-        #SEND HIPPO DATA
+
+    for i in range(0, 3):
+        # SEND HIPPO DATA
         hippos[i].update
 
 
