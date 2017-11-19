@@ -1,9 +1,19 @@
 import RPi.GPIO as GPIO
 from time import sleep
+import thread
 
 BTN = 18
+YELLOW = 0
+GREEN = 1
+ORANGE = 2
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
+
+def servo_thread(servo_id):
+	while True:
+		if(socket_arr[servo_id]):
+			servo_arr[servo_id].move()
+			socket_arr[servo_id] = False
 
 
 class Servo():
@@ -16,7 +26,7 @@ class Servo():
 		set_angle = 0.053*angle + 2.2
 		self.pwm.ChangeDutyCycle(set_angle)
 
-	def move(self, angle):
+	def move(self):
 		self.setAngle(0)
 		sleep(0.75)
 		self.setAngle(120)
@@ -25,36 +35,18 @@ class Servo():
 		self.pwm.stop()
 
 
-def move(n):
-	if(n == 'B'):
-		servoB.move()
-	elif(n == 'G'):
-		servoG.move()
-	elif(n == 'O'):
-		servoO.move()
-
-
-def loop():
-	print("program running")
-	while True:
-		btnState = GPIO.input(BTN)
-		if btnState == 0:
-			print("button press")
-			move('B')
-			move('G')
-			move('O')
-			sleep(0.75)
-
-
 if __name__ == '__main__':		# Program start from here
 	GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	servoB = Servo(17)
-	servoG = Servo(22)
-	servoO = Servo(23)
+	y = Servo(17)
+	g = Servo(22)
+	o = Servo(23)
+	servo_arr = [y, g, o]
 	try:
-		loop()
+		thread.start_new_thread(servo_thread, YELLOW)
+		thread.start_new_thread(servo_thread, GREEN)
+		thread.start_new_thread(servo_thread, ORANGE)
 	except KeyboardInterrupt:	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-		servoB.stop()
-		servoG.stop()
-		servoO.stop()
+		servo_arr[YELLOW].stop()
+		servo_arr[GREEN].stop()
+		servo_arr[ORGANGE].stop()
 		GPIO.cleanup()
