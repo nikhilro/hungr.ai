@@ -1,23 +1,16 @@
-import math
-from vector import Vector
-
-
 class Hippo(object):
-    def __init__(self, n, radius, fps, resolution):
-        """ Takes coordinates of center and radius of the ball """
+    def __init__(self, n):
         self.color = n
         self.counter = 0
-        self.pos = p
-        self.move = false
-
+        self.move = False
 
     def update(self, p):
         """ Takes new location of the ball as a vector """
-        self.move = false
+        self.move = False
 
     def chomp(self, bool):
         """ Determines the predicted location to make a decision to move"""
-        self.move = chomp
+        self.move = bool
 
     def counter(self):
-        self.counter = self.counter +1;
+        self.counter = self.counter + 1

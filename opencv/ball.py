@@ -1,6 +1,4 @@
-import math
-import numpy as np
-from vector import Vector
+import numpy
 
 
 class Ball(object):
@@ -14,11 +12,11 @@ class Ball(object):
         self.acc = None
         self.fps = fps
         self.resolution = resolution
-        self.exists = false;
+        self.exists = False
 
     def update(self, p):
         """ Takes new location of the ball as a vector """
-        self.exists = true;
+        self.exists = True
 
         if self.pos:
             self.lastPos = self.pos
@@ -38,22 +36,22 @@ class Ball(object):
     def bool(self):
         """ Determines the predicted location to make a decision to move"""
         if self.acc:
-            predict = self._div_(self.vel, ffs)
-            predict = predict + self._div_(self.acc, 0.5 * (pow(ffs, 2)))
+            predict = self._div_(self.vel, self.fps)
+            predict = predict + self._div_(self.acc, 0.5 * (pow(self.fps, 2)))
             predict = predict + self.pos
 
             if predict.x <= self.resolution / 3 and predict.y - (2 / 5 * self.resolution) <= (
                     1 / 5 * self.resolution) and predict.y >= 0:
-                return true
+                return True
         else:
-            return false
+            return False
 
     def endCheck(self):
         if self.exists:
-            self.exists = false
-            return true
+            self.exists = False
+            return True
         else:
-            return false
+            return False
 
     def lastSeen(self):
         a = numpy.array(self.pos.x, self.pos.y)

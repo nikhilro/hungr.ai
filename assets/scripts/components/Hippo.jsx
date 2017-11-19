@@ -6,6 +6,7 @@ export default class Hippo extends Component {
 
   static propTypes = {
     name: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     score: PropTypes.number
   };
 
@@ -15,7 +16,9 @@ export default class Hippo extends Component {
 
   render() {
     return (
-      <div className="hippo">
+      <div className="hippo" style={{
+          'color': this.props.color
+        }}>
         <div className="hippo-name">
           { this.props.name }
         </div>
