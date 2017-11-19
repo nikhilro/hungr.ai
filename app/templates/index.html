@@ -34,7 +34,7 @@
         // Request the video stream once connected
         this.socket.onopen = function () {
             console.log("Socket connected!");
-            // socket.send('read_camera');
+            socket.send('read_camera');
         };
 
         // socket.on('connect', function() {
