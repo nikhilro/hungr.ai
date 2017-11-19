@@ -220,9 +220,15 @@ body {
   float: right;
 }
 
+.video-wrapper {
+  display: flex;
+  height: 100%;
+}
+
 .video {
   height: 50%;
   width: 80%;
+  margin: auto;
   display: flex;
   border: 2px solid black;
 }

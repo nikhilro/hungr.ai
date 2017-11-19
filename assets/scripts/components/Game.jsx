@@ -20,8 +20,12 @@ export default class Game extends Component {
   render() {
     return (
       <div className="game">
-        <Video />
-        <Button bsStyle="primary" bsSize="large" block>Chomp!</Button>
+        <div className="video-wrapper">
+          <Video />
+        </div>
+        <div>
+          <Button bsStyle="primary" bsSize="large" block>Chomp!</Button>
+        </div>
       </div>
     );
   }
